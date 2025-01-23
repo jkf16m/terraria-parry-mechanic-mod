@@ -1,0 +1,3 @@
+displayName = Parry Mechanic
+author = jkf16m
+version = 0.3.0
