@@ -19,22 +19,17 @@ namespace parry_mechanic
         {
             ParryDodge,
         }
-        public static ModKeybind MyKeybind { get; private set; }
-
-        public static VisualModConfig VisualModConfig { get; private set; }
-        public static GameplayModConfig GameplayModConfig { get; private set; }
 
         public override void Load()
         {
-            MyKeybind = KeybindLoader.RegisterKeybind(this, "Parry", "Z");
-            VisualModConfig = ModContent.GetInstance<VisualModConfig>();
-            GameplayModConfig = ModContent.GetInstance<GameplayModConfig>();
+            DIService.Register(new ParryModKeybind(this));
+            DIService.Register(ModContent.GetInstance<VisualModConfig>());
+            DIService.Register(ModContent.GetInstance<GameplayModConfig>());
         }
 
         public override void Unload()
         {
-            // Unload the keybind to prevent memory leaks
-            MyKeybind = null;
+            DIService.Clear();
         }
 
 
