@@ -1,25 +1,37 @@
-Parry mechanic.
+[h1]Parry mechanic[/h1]
 
-Current features:
+[h2]Current features:[/h2]
 
-# Parry:
--- The main mechanic of the mod
--- Assign the parry button to any of your liking
--- After parrying an enemy, depending on your accuracy, the delay will be more or less.
-# Critical Zenith (Experimental feature):
--- Some weird idea I'm working on, not sure if it will stay or not, but for now I like it.
--- After parrying an enemy, you will enter into a "Heightened" state, and if you're able to dodge enemies and positioning
-  yourself without needing to parry... You will have a small opportunity to deal a Critical Zenith hit!!
--- This special critical hit, deals the damage of your weapon + a huge percentage of health from the enemy, but it is difficult to pull it off.
--- You will lose your "focus" or "Heightened Senses" once you either:
----- Get hit once
----- Hit an enemy before the critical zenith time window
----- Parry an enemy
--- If your parry is poorly-timed, you will not be able to perform it.
+[h3]Parry:[/h3]
+[list]
+    [*] The main mechanic of the mod
+    [*] Assign the parry button to any of your liking
+    [*] After parrying an enemy, depending on your accuracy, the delay will be more or less.
+[/list]
 
-Working on:
-# Overall code refactoring:
--- This is my first mod on TModLoader
-# Multiplayer support:
--- I have no idea how client-server communication works on TModLoader, but I have a simple example implemented on this mod.
-    Of course, I have no idea if it is correctly implemented or not.
+[h3]Critical Zenith (Experimental feature):[/h3]
+[list]
+    [*] Some weird idea I'm working on, not sure if it will stay or not, but for now I like it.
+    [*] After parrying an enemy, you will enter into a "Heightened" state, and if you're able to dodge enemies and positioning yourself without needing to parry... You will have a small opportunity to deal a Critical Zenith hit!!
+    [*] This special critical hit, deals the damage of your weapon + a huge percentage of health from the enemy, but it is difficult to pull it off.
+    [*] If your parry is poorly-timed, you will not be able to perform it.
+    [*] You will lose your "focus" or "Heightened Senses" once you either:
+    [*] [list]
+        [*] Get hit once
+        [*] Hit an enemy before the critical zenith time window
+        [*] Parry an enemy
+    [/list]
+[/list]
+
+[hr][/hr]
+
+[h2]Working on:[/h2]
+[list]
+    [*] Overall code refactoring
+    [*] Multiplayer support [i]I have no idea how client-server communication works on TModLoader, but I have a simple example implemented on this mod.
+    Of course, I have no idea if it is correctly implemented or not.[/i]
+[/list]
+
+[hr][/hr]
+
+[b]Mod icon made by TheMrMoki[/b]
