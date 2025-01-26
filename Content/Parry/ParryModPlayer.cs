@@ -14,7 +14,7 @@ using parry_mechanic.Content.Network;
 
 namespace parry_mechanic.Content.Parry
 {
-    internal class ParryModPlayer : ModPlayer
+    public class ParryModPlayer : ModPlayer
     {
         private GameplayModConfigService    gameplayModConfigService;
         private VisualModConfigService      visualModConfigService;
@@ -23,11 +23,21 @@ namespace parry_mechanic.Content.Parry
 
         public override void Initialize()
         {
-            gameplayModConfigService    = DIService.Resolve<GameplayModConfigService>();
-            visualModConfigService      = DIService.Resolve<VisualModConfigService>();
-            parryModKeybindService      = DIService.Resolve<ParryModKeybindService>();
-            networkService              = DIService.Resolve<NetworkService>();
+            gameplayModConfigService    = Container.Resolve<GameplayModConfigService>();
+            visualModConfigService      = Container.Resolve<VisualModConfigService>();
+            parryModKeybindService      = Container.Resolve<ParryModKeybindService>();
         }
+
+        void AddParryBuff(BinaryReader reader, int whoAmI)
+        {
+            int player = reader.ReadByte();
+            if (Main.netMode == NetmodeID.Server)
+            {
+                player = whoAmI;
+            }
+
+        }
+
         /**
          * <summary>The minimal mana amount to be able to use the Parry ability</summary>
          */

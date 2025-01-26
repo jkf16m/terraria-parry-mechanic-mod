@@ -10,6 +10,7 @@ using Terraria.ModLoader;
 using parry_mechanic.Content;
 using parry_mechanic.Content.Parry;
 using parry_mechanic.Content.Network;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace parry_mechanic
 {
@@ -21,26 +22,14 @@ namespace parry_mechanic
             ParryDodge,
         }
 
-        private NetworkService networkService;
-
-        
 
         public override void Load()
         {
-            DIService.Register(new ParryModKeybindService(this));
-            DIService.Register(ModContent.GetInstance<VisualModConfigService>());
-            DIService.Register(ModContent.GetInstance<GameplayModConfigService>());
-            networkService = new NetworkService();
-            DIService.Register(networkService);
+            Container.Initialize(this);   
         }
-        public override void PostSetupContent()
-        {
-            networkService.PostSetupContent();
-        }
-
         public override void Unload()
         {
-            DIService.Clear();
+            Container.Clear();
         }
 
 
@@ -48,8 +37,6 @@ namespace parry_mechanic
         //TODO: Introduce OOP packets into tML, to avoid this god-class level hardcode.
         public override void HandlePacket(BinaryReader reader, int whoAmI)
         {
-            networkService.HandlePacket(reader, whoAmI);
-
 
 
             MessageType msgType = (MessageType)reader.ReadByte();

@@ -14,19 +14,6 @@ namespace parry_mechanic.Content.Network
         public bool Ready { get; private set; } = false;
         public NetworkService() {}
 
-        public void HandlePacket(BinaryReader reader, int whoAmI)
-        {
-            if (Ready == false) return;
-
-            var nextByte = reader.ReadByte();
-            if (finalDefinitions.ContainsKey(nextByte) == false)
-            {
-                return;
-            }
-
-            finalDefinitions[nextByte].Invoke(reader, whoAmI);
-        }
-
         public void PostSetupContent()
         {
             var orderedPacketDefinitions = packetDefinitions.OrderBy(q => q.Key).ToList();
@@ -41,9 +28,24 @@ namespace parry_mechanic.Content.Network
             Ready = true;
         }
 
-        public void RegisterClientToServerAction(string name, Action<BinaryReader, int> handler)
+        public void Register(string name, Action<BinaryReader, int> handler)
         {
             packetDefinitions[name] = handler;
         }
+
+
+        public void HandlePacket(BinaryReader reader, int whoAmI)
+        {
+            if (Ready == false) return;
+
+            var nextByte = reader.ReadByte();
+            if (finalDefinitions.ContainsKey(nextByte) == false)
+            {
+                return;
+            }
+
+            finalDefinitions[nextByte].Invoke(reader, whoAmI);
+        }
+
     }
 }
