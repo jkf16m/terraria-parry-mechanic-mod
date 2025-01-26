@@ -3,7 +3,7 @@ using Terraria.ModLoader.Config;
 
 namespace parry_mechanic.Content
 {
-    public class GameplayModConfig : ModConfig
+    public class GameplayModConfigService : ModConfig
     {
         public override ConfigScope Mode => ConfigScope.ServerSide;
 
