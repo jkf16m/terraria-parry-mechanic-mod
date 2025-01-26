@@ -5,7 +5,7 @@ using Terraria.ModLoader.Config;
 
 namespace parry_mechanic.Content
 {
-    public class VisualModConfigService : ModConfig
+    public class VisualModConfig : ModConfig
     {
         public override ConfigScope Mode => ConfigScope.ClientSide;
 

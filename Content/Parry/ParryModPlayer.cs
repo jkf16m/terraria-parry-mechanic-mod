@@ -10,23 +10,19 @@ using Terraria.GameInput;
 using System.Collections.Generic;
 using parry_mechanic;
 using parry_mechanic.Content.CriticalZenith;
-using parry_mechanic.Content.Network;
 
 namespace parry_mechanic.Content.Parry
 {
     internal class ParryModPlayer : ModPlayer
     {
-        private GameplayModConfigService    gameplayModConfigService;
-        private VisualModConfigService      visualModConfigService;
-        private ParryModKeybindService      parryModKeybindService;
-        private NetworkService              networkService;
-
-        public override void SetStaticDefaults()
+        private GameplayModConfig   gameplayModConfig;
+        private VisualModConfig     visualModConfig;
+        private ParryModKeybind     parryModKeybind;
+        public override void Initialize()
         {
-            gameplayModConfigService    = DIService.Resolve<GameplayModConfigService>();
-            visualModConfigService      = DIService.Resolve<VisualModConfigService>();
-            parryModKeybindService      = DIService.Resolve<ParryModKeybindService>();
-            networkService              = DIService.Resolve<NetworkService>();
+            gameplayModConfig   = DIService.Resolve<GameplayModConfig>();
+            visualModConfig     = DIService.Resolve<VisualModConfig>();
+            parryModKeybind     = DIService.Resolve<ParryModKeybind>();
         }
         /**
          * <summary>The minimal mana amount to be able to use the Parry ability</summary>
@@ -67,7 +63,7 @@ namespace parry_mechanic.Content.Parry
 
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (parryModKeybindService.ParryKeybind.JustPressed
+            if (parryModKeybind.ParryKeybind.JustPressed
                 && Player.CheckMana(parryMinimumManaCost, false, false)
                 && Player.HasBuff(ModContent.BuffType<StrainedReflexesDebuff>()) == false
                 && Player.HasBuff(ModContent.BuffType<ParryBuff>()) == false)
@@ -205,7 +201,7 @@ namespace parry_mechanic.Content.Parry
             if (
                 Player.HasBuff(ModContent.BuffType<ManaVeilBuff>())
                 // adding this condition, in case the mod has no particle density configured
-                && visualModConfigService.ManaVeilParticleDensity > 0f
+                && visualModConfig.ManaVeilParticleDensity > 0f
                 )
             {
                 manaVeilParticleDelay++;
@@ -223,7 +219,7 @@ namespace parry_mechanic.Content.Parry
 
                 // then, getting the factor of mana the player has, with 200 as a basis.
                 // if a player has more than 200 of mana, then there will be no more visual changes.
-                float manaFactor = Player.statMana / (float)visualModConfigService.MaxManaCapParticleDensity;
+                float manaFactor = Player.statMana / (float)visualModConfig.MaxManaCapParticleDensity;
 
                 // since manaFactor could become bigger than 1.0, then its value will be clamped.
                 manaFactor = MathHelper.Clamp(manaFactor, 0f, 1f);
@@ -231,7 +227,7 @@ namespace parry_mechanic.Content.Parry
                 // Configuration step.
                 // In this step, it will use the configuration value of the mod, to determine how much delay this effect
                 // must have.
-                manaFactor = MathHelper.Lerp(0f, manaFactor, visualModConfigService.ManaVeilParticleDensity);
+                manaFactor = MathHelper.Lerp(0f, manaFactor, visualModConfig.ManaVeilParticleDensity);
 
                 // now the final factor is actually:
                 // - checking the player's mana potential
@@ -255,7 +251,7 @@ namespace parry_mechanic.Content.Parry
                 var finalScale = MathHelper.Lerp(1f, 2f, scaleFactor);
 
                 // adds a final multiplication step, in case one wants to make the particles, bigger or smaller
-                finalScale *= visualModConfigService.ManaVeilParticlesSizeScale;
+                finalScale *= visualModConfig.ManaVeilParticlesSizeScale;
 
 
                 // now, the condition should work, using major or equal than, because this
@@ -323,7 +319,7 @@ namespace parry_mechanic.Content.Parry
             // only if the feature is enabled
             if (
                 precisionFactor < 0.33f
-                && gameplayModConfigService.CriticalZenithFeatureFlag == true
+                && gameplayModConfig.CriticalZenithFeatureFlag == true
                 )
             {
                 Player.AddBuff(ModContent.BuffType<HeightenedSensesBuff>(), heightenedSensesBuffTime, false, false);
