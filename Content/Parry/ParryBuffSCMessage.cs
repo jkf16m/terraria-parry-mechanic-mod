@@ -10,6 +10,13 @@ namespace parry_mechanic.Content.Parry
 {
     public class ParryBuffSCMessage : SCMessage<ParryMechanicMod, EmptyData, EmptyData>
     {
+        private GameplayModConfigService gameplayModConfigService;
+        public ParryBuffSCMessage()
+        {
+            gameplayModConfigService = Container.Resolve<GameplayModConfigService>();
+        }
+
+
         public override MessageType Type => MessageType.GiveParryBuff;
 
         /**
@@ -25,8 +32,8 @@ namespace parry_mechanic.Content.Parry
         public override void OnServer(int whoAmI)
         {
             var player = Main.player[whoAmI];
-            int parryTimeWindow = 50;
-            int parryMinimumManaCost = 20;
+            int parryTimeWindow = gameplayModConfigService.ParryTimeWindowOnTicks;
+            int parryMinimumManaCost = gameplayModConfigService.ParryMinimumManaCost;
 
             if(player.CheckMana(parryMinimumManaCost, false, false)
                 && player.HasBuff(ModContent.BuffType<StrainedReflexesDebuff>()) == false
@@ -35,8 +42,6 @@ namespace parry_mechanic.Content.Parry
                 player.AddBuff(ModContent.BuffType<ManaVeilBuff>(), 99999, true, false);
                 player.AddBuff(ModContent.BuffType<ParryBuff>(), parryTimeWindow, true, false);
             }
-
-
         }
     }
 }
