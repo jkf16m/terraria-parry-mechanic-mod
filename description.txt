@@ -20,7 +20,7 @@
 ========================================
 =========<< VERSION CHANGES >>==========          
 
-[v0.5.0-gv1.4.4.9]
+[v0.5.0]
 - Added configuration color for the critical zenith, but the feature is still work in progress.
 - Initial multiplayer support.
 
