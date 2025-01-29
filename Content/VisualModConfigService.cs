@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Configuration;
 using Terraria.ModLoader.Config;
 
 namespace parry_mechanic.Content
@@ -25,5 +24,45 @@ namespace parry_mechanic.Content
         [Slider]
         [DefaultValue(1f)]
         public float ManaVeilParticlesSizeScale = 1f;
+
+        [SeparatePage]
+        public int DummyPage = 0;
+
+
+        [Range(0, 255)]
+        [Increment(1)]
+        [Slider]
+        [SliderColor(255, 0, 0)]
+        public int CriticalZenithPrimaryColorRed = 255;
+
+        [Range(0, 255)]
+        [Increment(1)]
+        [Slider]
+        [SliderColor(0, 255, 0)]
+        public int CriticalZenithPrimaryColorGreen = 0;
+
+        [Range(0, 255)]
+        [Increment(1)]
+        [Slider]
+        [SliderColor(0, 0, 255)]
+        public int CriticalZenithPrimaryColorBlue = 0;
+
+        [Range(0, 255)]
+        [Increment(1)]
+        [Slider]
+        [SliderColor(255, 0, 0)]
+        public int CriticalZenithSecondaryColorRed = 255;
+
+        [Range(0, 255)]
+        [Increment(1)]
+        [Slider]
+        [SliderColor(0, 255, 0)]
+        public int CriticalZenithSecondaryColorGreen = 0;
+
+        [Range(0, 255)]
+        [Increment(1)]
+        [Slider]
+        [SliderColor(0, 0, 255)]
+        public int CriticalZenithSecondaryColorBlue = 0;
     }
 }

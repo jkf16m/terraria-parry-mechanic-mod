@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using log4net;
+﻿using log4net;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -16,7 +11,7 @@ namespace parry_mechanic.Content.Parry
         public ParryBuffSCMessage()
         {
             gameplayModConfigService = Container.Resolve<GameplayModConfigService>();
-            logger                   = Container.Resolve<ILog>();
+            logger = Container.Resolve<ILog>();
         }
 
 
@@ -41,9 +36,9 @@ namespace parry_mechanic.Content.Parry
             int parryTimeWindow = gameplayModConfigService.ParryTimeWindowOnTicks;
             int parryMinimumManaCost = gameplayModConfigService.ParryMinimumManaCost;
 
-            
 
-            if(player.CheckMana(parryMinimumManaCost, false, false)
+
+            if (player.CheckMana(parryMinimumManaCost, false, false)
                 && player.HasBuff(ModContent.BuffType<StrainedReflexesDebuff>()) == false
                 && player.HasBuff(ModContent.BuffType<ParryBuff>()) == false)
             {

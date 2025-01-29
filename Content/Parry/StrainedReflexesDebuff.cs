@@ -1,7 +1,7 @@
 ﻿using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
 using Terraria.Audio;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace parry_mechanic.Content.Parry
 {

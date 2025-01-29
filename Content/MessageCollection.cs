@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using parry_mechanic.Content.Parry;
 
 namespace parry_mechanic.Content
@@ -27,7 +22,7 @@ namespace parry_mechanic.Content
 
         public static bool HandleCSCClientPackets(MessageType type, int whoAmI)
         {
-            if(CSCMessages.ContainsKey(type) == false)
+            if (CSCMessages.ContainsKey(type) == false)
             {
                 return false;
             }
@@ -38,7 +33,7 @@ namespace parry_mechanic.Content
 
         public static bool HandleSCClientPackets(MessageType type, int whoAmI)
         {
-            if(SCMessages.ContainsKey(type) == false)
+            if (SCMessages.ContainsKey(type) == false)
             {
                 return false;
             }

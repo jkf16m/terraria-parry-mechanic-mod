@@ -18,6 +18,46 @@ Configs: {
 			Label: Max Mana Cap Particle Density
 			Tooltip: Sets how high the mana should be, to reach the maximum particle effects for the mana veil.
 		}
+
+		CriticalZenithPrimaryColorRed: {
+			Label: Critical Zenith Primary Color Red
+			Tooltip: ""
+		}
+
+		CriticalZenithSecondaryColorGreen: {
+			Label: Critical Zenith Secondary Color Green
+			Tooltip: ""
+		}
+
+		CriticalZenithTertiaryColorBlue: {
+			Label: Critical Zenith Tertiary Color Blue
+			Tooltip: ""
+		}
+
+		DummyPage: {
+			Label: Dummy Page
+			Tooltip: ""
+		}
+
+		CriticalZenithPrimaryColorGreen: {
+			Label: Critical Zenith Primary Color Green
+			Tooltip: ""
+		}
+
+		CriticalZenithPrimaryColorBlue: {
+			Label: Critical Zenith Primary Color Blue
+			Tooltip: ""
+		}
+
+		CriticalZenithSecondaryColorRed: {
+			Label: Critical Zenith Secondary Color Red
+			Tooltip: ""
+		}
+
+		CriticalZenithSecondaryColorBlue: {
+			Label: Critical Zenith Secondary Color Blue
+			Tooltip: ""
+		}
 	}
 
 	GameplayModConfigService: {
