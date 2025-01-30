@@ -1,9 +1,11 @@
-﻿using System;
-using log4net;
-using parry_mechanic.Content;
+﻿using System.Collections.Generic;
+using System;
+using Microsoft.Extensions.DependencyInjection;
 using parry_mechanic.Content.Parry;
-using parry_mechanic.TinyIoc;
+using parry_mechanic.Content;
 using Terraria.ModLoader;
+using parry_mechanic.TinyIoc;
+using log4net;
 
 public static class Container
 {

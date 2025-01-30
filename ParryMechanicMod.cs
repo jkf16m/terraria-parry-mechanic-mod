@@ -1,8 +1,18 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
-using parry_mechanic.Content;
-using Terraria;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Terraria.ID;
+using Terraria;
 using Terraria.ModLoader;
+using parry_mechanic.Content;
+using parry_mechanic.Content.Parry;
+using parry_mechanic.Content.Network;
+using Microsoft.Extensions.DependencyInjection;
+using Terraria.ModLoader.IO;
+using log4net;
 
 namespace parry_mechanic
 {
@@ -28,14 +38,13 @@ namespace parry_mechanic
             if (Main.netMode == NetmodeID.Server)
             {
                 MessageCollection.HandleCSCServerPackets(type, whoAmI);
-            }
-            else if (Main.netMode == NetmodeID.MultiplayerClient)
+            }else if(Main.netMode == NetmodeID.MultiplayerClient)
             {
-                if (MessageCollection.HandleSCClientPackets(type, whoAmI) == true)
+                if(MessageCollection.HandleSCClientPackets(type, whoAmI) == true)
                 {
                     return;
                 }
-
+                
                 if (reader.BaseStream.Position < reader.BaseStream.Length)
                 {
                     int originalSenderId = (int)reader.ReadByte();

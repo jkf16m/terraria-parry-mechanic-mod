@@ -1,4 +1,12 @@
-﻿using Terraria;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading.Tasks;
+using Terraria;
+using Terraria.GameContent.UI.ResourceSets;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -19,7 +27,7 @@ namespace parry_mechanic.Content
         public delegate void Rebroadcast(int toClient = -1, int ignoreClient = -1);
         public abstract MessageType Type { get; }
         public virtual bool OnServerAndClientMode => false;
-
+        
 
 
 
@@ -28,7 +36,7 @@ namespace parry_mechanic.Content
         // in case this is not multiplayer, then GetPacket will not execute, and instead, redirect the call to HandleServerPacket
         public void Fire()
         {
-            if (Main.netMode == NetmodeID.SinglePlayer)
+            if(Main.netMode == NetmodeID.SinglePlayer)
             {
                 HandleServerPacket(Type, Main.myPlayer);
             }
@@ -56,7 +64,7 @@ namespace parry_mechanic.Content
             {
 
                 // in case this is a single player game, then the rebroadcast runs directly the client side logic instead
-                if (Main.netMode == NetmodeID.SinglePlayer)
+                if(Main.netMode == NetmodeID.SinglePlayer)
                 {
                     OnServer(result.Item2, whoAmI, rebroadcast: SinglePlayerRebroadcast(whoAmI));
                 }

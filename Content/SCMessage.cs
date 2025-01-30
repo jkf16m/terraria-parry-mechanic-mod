@@ -1,4 +1,11 @@
-﻿using Terraria;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Terraria;
+using Terraria.GameContent.UI.ResourceSets;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -18,7 +25,7 @@ namespace parry_mechanic.Content
         public delegate void Rebroadcast(int toClient = -1, int ignoreClient = -1);
         public abstract MessageType Type { get; }
         public virtual bool OnServerAndClientMode => false;
-
+        
 
 
 
@@ -27,7 +34,7 @@ namespace parry_mechanic.Content
         public void Fire(int whoAmI, int toClient = -1, int ignoreClient = -1)
         {
             OnServer(whoAmI);
-            if (Main.netMode == NetmodeID.SinglePlayer)
+            if(Main.netMode == NetmodeID.SinglePlayer)
             {
                 HandleClientsPacket(Type, whoAmI);
             }
@@ -37,7 +44,7 @@ namespace parry_mechanic.Content
             }
         }
 
-        public virtual void OnServer(int whoAmI) { }
+        public virtual void OnServer(int whoAmI) {}
 
 
         // after that, the server can rebroadcast to all-clients or not, depending whether the OnClients method is implemented, or if it is needed.
@@ -93,6 +100,6 @@ namespace parry_mechanic.Content
         }
 
         // and executes client-side logic
-        public virtual void OnClients(ServerDataType data, int whoAmI) { }
+        public virtual void OnClients(ServerDataType data, int whoAmI) {}
     }
 }

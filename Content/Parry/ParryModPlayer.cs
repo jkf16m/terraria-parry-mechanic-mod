@@ -1,31 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.IO;
-using Microsoft.Xna.Framework;
-using parry_mechanic.Content.CriticalZenith;
-using parry_mechanic.Content.Network;
 using Terraria;
 using Terraria.Audio;
-using Terraria.GameInput;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.GameInput;
+using System.Collections.Generic;
+using parry_mechanic;
+using parry_mechanic.Content.CriticalZenith;
+using parry_mechanic.Content.Network;
 
 namespace parry_mechanic.Content.Parry
 {
     public class ParryModPlayer : ModPlayer
     {
-        private GameplayModConfigService gameplayModConfigService;
-        private VisualModConfigService visualModConfigService;
-        private ParryModKeybindService parryModKeybindService;
-        private ThunderBoltService thunderBoltService;
-        private NetworkService networkService;
+        private GameplayModConfigService    gameplayModConfigService;
+        private VisualModConfigService      visualModConfigService;
+        private ParryModKeybindService      parryModKeybindService;
+        private NetworkService              networkService;
 
         public override void Initialize()
         {
-            gameplayModConfigService = Container.Resolve<GameplayModConfigService>();
-            visualModConfigService = Container.Resolve<VisualModConfigService>();
-            parryModKeybindService = Container.Resolve<ParryModKeybindService>();
-            thunderBoltService = Container.Resolve<ThunderBoltService>();
+            gameplayModConfigService    = Container.Resolve<GameplayModConfigService>();
+            visualModConfigService      = Container.Resolve<VisualModConfigService>();
+            parryModKeybindService      = Container.Resolve<ParryModKeybindService>();
         }
 
         void AddParryBuff(BinaryReader reader, int whoAmI)
@@ -109,9 +109,7 @@ namespace parry_mechanic.Content.Parry
             {
                 var whichThunder = Main.rand.Next(0, 2);
 
-                var color = new Color(visualModConfigService.CriticalZenithPrimaryColorRed, visualModConfigService.CriticalZenithPrimaryColorGreen, visualModConfigService.CriticalZenithPrimaryColorBlue, 0);
-
-                Dust d = Dust.NewDustPerfect(thunderPoint, DustID.TintableDust, newColor: color, Scale: 4f);
+                Dust d = Dust.NewDustPerfect(thunderPoint, DustID.Electric, null, Scale: 4f);
                 d.noGravity = true;
                 thunderDusts.Add(d);
             }
