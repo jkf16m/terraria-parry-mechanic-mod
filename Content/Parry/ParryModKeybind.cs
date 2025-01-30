@@ -7,10 +7,10 @@ using Terraria.ModLoader;
 
 namespace parry_mechanic.Content.Parry
 {
-    public class ParryModKeybindService
+    public class ParryModKeybind
     {
         public ModKeybind ParryKeybind { get; private set; }
-        public ParryModKeybindService(Mod mod) {
+        public ParryModKeybind(Mod mod) {
             ParryKeybind = KeybindLoader.RegisterKeybind(mod, "Parry", "Z");
         }
     }

@@ -1,7 +1,7 @@
 # This file will automatically update with entries for new content after a build and reload.
 
 Configs: {
-	VisualModConfigService: {
+	VisualModConfig: {
 		DisplayName: Visual Mod Config
 
 		ManaVeilParticleDensity: {
@@ -20,7 +20,7 @@ Configs: {
 		}
 	}
 
-	GameplayModConfigService: {
+	GameplayModConfig: {
 		DisplayName: Gameplay Mod Config
 
 		CriticalZenithFeatureFlag: {
