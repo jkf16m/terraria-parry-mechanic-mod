@@ -74,7 +74,7 @@ namespace parry_mechanic.Content.Parry
 
         }
 
-        // FIRST, THE PLAYER PRESSES THE KEYBIND TO PARRY
+
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
             if (parryModKeybindService.ParryKeybind.JustPressed
@@ -82,20 +82,17 @@ namespace parry_mechanic.Content.Parry
                 && Player.HasBuff(ModContent.BuffType<StrainedReflexesDebuff>()) == false
                 && Player.HasBuff(ModContent.BuffType<ParryBuff>()) == false)
             {
-                new ParryCSCMessage().Fire();
+                Player.AddBuff(ModContent.BuffType<ManaVeilBuff>(), 99999, false, false);
+                Player.AddBuff(ModContent.BuffType<ParryBuff>(), parryTimeWindow, false, false);
 
-
-                //Player.AddBuff(ModContent.BuffType<ManaVeilBuff>(), 99999, false, false);
-                //Player.AddBuff(ModContent.BuffType<ParryBuff>(), parryTimeWindow, false, false);
-
-                //// small visual particles
-                //for (int i = 0; i < 20; i++)
-                //{
-                //    Vector2 speed = Main.rand.NextVector2CircularEdge(1f, 1f);
-                //    Dust d = Dust.NewDustPerfect(Player.Center + speed * 4, DustID.PurpleCrystalShard, speed * 2, Scale: 1f);
-                //    d.noGravity = true;
-                //}
-                //SoundEngine.PlaySound(SoundID.MaxMana with { Pitch = 2f, Volume = 0.5f });
+                // small visual particles
+                for (int i = 0; i < 20; i++)
+                {
+                    Vector2 speed = Main.rand.NextVector2CircularEdge(1f, 1f);
+                    Dust d = Dust.NewDustPerfect(Player.Center + speed * 4, DustID.PurpleCrystalShard, speed * 2, Scale: 1f);
+                    d.noGravity = true;
+                }
+                SoundEngine.PlaySound(SoundID.MaxMana with { Pitch = 2f, Volume = 0.5f });
             }
         }
         private List<Dust> thunderDusts = new List<Dust>();
@@ -436,10 +433,10 @@ namespace parry_mechanic.Content.Parry
         public static void SendparryDodgeMessage(int whoAmI)
         {
             // This code is called by both the initial 
-            //ModPacket packet = ModContent.GetInstance<ParryMechanicMod>().GetPacket();
-            //packet.Write((byte)ParryMechanicMod.MessageType.ParryDodge);
-            //packet.Write((byte)whoAmI);
-            //packet.Send(ignoreClient: whoAmI);
+            ModPacket packet = ModContent.GetInstance<ParryMechanicMod>().GetPacket();
+            packet.Write((byte)ParryMechanicMod.MessageType.ParryDodge);
+            packet.Write((byte)whoAmI);
+            packet.Send(ignoreClient: whoAmI);
         }
 
 
