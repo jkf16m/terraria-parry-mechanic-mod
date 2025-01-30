@@ -5,7 +5,6 @@ using parry_mechanic.Content.Parry;
 using parry_mechanic.Content;
 using Terraria.ModLoader;
 using parry_mechanic.TinyIoc;
-using log4net;
 
 public static class Container
 {
@@ -22,8 +21,6 @@ public static class Container
         services.Register(new ParryModKeybindService(mod));
         services.Register(ModContent.GetInstance<VisualModConfigService>());
         services.Register(ModContent.GetInstance<GameplayModConfigService>());
-        var log = LogManager.GetLogger(mod.Name);
-        services.Register(log);
     }
 
     public static T Resolve<T>() where T : class

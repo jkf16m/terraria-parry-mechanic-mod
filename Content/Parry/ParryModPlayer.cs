@@ -83,6 +83,19 @@ namespace parry_mechanic.Content.Parry
                 && Player.HasBuff(ModContent.BuffType<ParryBuff>()) == false)
             {
                 new ParryCSCMessage().Fire();
+
+
+                //Player.AddBuff(ModContent.BuffType<ManaVeilBuff>(), 99999, false, false);
+                //Player.AddBuff(ModContent.BuffType<ParryBuff>(), parryTimeWindow, false, false);
+
+                //// small visual particles
+                //for (int i = 0; i < 20; i++)
+                //{
+                //    Vector2 speed = Main.rand.NextVector2CircularEdge(1f, 1f);
+                //    Dust d = Dust.NewDustPerfect(Player.Center + speed * 4, DustID.PurpleCrystalShard, speed * 2, Scale: 1f);
+                //    d.noGravity = true;
+                //}
+                //SoundEngine.PlaySound(SoundID.MaxMana with { Pitch = 2f, Volume = 0.5f });
             }
         }
         private List<Dust> thunderDusts = new List<Dust>();

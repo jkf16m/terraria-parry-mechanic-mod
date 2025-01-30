@@ -40,7 +40,9 @@ namespace parry_mechanic.Content
             }
             else
             {
-                BroadcastToClients(whoAmI, toClient, ignoreClient);
+                var packet = ModContent.GetInstance<ModType>().GetPacket();
+
+                BroadcastToClients(toClient, ignoreClient);
             }
         }
 
@@ -48,19 +50,18 @@ namespace parry_mechanic.Content
 
 
         // after that, the server can rebroadcast to all-clients or not, depending whether the OnClients method is implemented, or if it is needed.
-        private void BroadcastToClients(int whoAmI, int toClient = -1, int ignoreClient = -1)
+        private void BroadcastToClients(int toClient = -1, int ignoreClient = -1)
         {
             var packet = ModContent.GetInstance<ModType>().GetPacket();
 
-            OnBroadcastToClients(packet, whoAmI, toClient, ignoreClient);
+            OnBroadcastToClients(packet, toClient, ignoreClient);
         }
 
 
         // broadcasting logic to all clients
-        public virtual void OnBroadcastToClients(ModPacket packet, int whoAmI, int toClient = -1, int ignoreClient = -1)
+        public virtual void OnBroadcastToClients(ModPacket packet, int toClient = -1, int ignoreClient = -1)
         {
             packet.Write((byte)Type);
-            packet.Write((byte)whoAmI);
             packet.Send(toClient, ignoreClient);
         }
 
@@ -73,7 +74,7 @@ namespace parry_mechanic.Content
             var result = OnHandleClientPacket(type, whoAmI);
             if (result.Item1)
             {
-                InternalClientLogic(result.Item2, whoAmI);
+                OnClients(result.Item2, whoAmI);
             }
         }
 
@@ -89,17 +90,12 @@ namespace parry_mechanic.Content
             }
         }
 
-        private void InternalClientLogic(ServerDataType data, int whoAmI)
-        {
-            if (OnServerAndClientMode == true && Main.netMode != NetmodeID.SinglePlayer)
-            {
-                OnServer(whoAmI);
-            }
-
-            OnClients(data, whoAmI);
-        }
-
         // and executes client-side logic
-        public virtual void OnClients(ServerDataType data, int whoAmI) {}
+        public virtual void OnClients(ServerDataType data, int whoAmI) {
+            if(OnServerAndClientMode == true && Main.netMode != NetmodeID.SinglePlayer)
+            {
+                OnServer(Main.myPlayer);
+            }
+        }
     }
 }

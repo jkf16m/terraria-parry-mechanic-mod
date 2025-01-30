@@ -12,7 +12,6 @@ using parry_mechanic.Content.Parry;
 using parry_mechanic.Content.Network;
 using Microsoft.Extensions.DependencyInjection;
 using Terraria.ModLoader.IO;
-using log4net;
 
 namespace parry_mechanic
 {
@@ -20,9 +19,10 @@ namespace parry_mechanic
     public class ParryMechanicMod : Mod
     {
 
+
         public override void Load()
         {
-            Container.Initialize(this);
+            Container.Initialize(this);   
         }
         public override void Unload()
         {

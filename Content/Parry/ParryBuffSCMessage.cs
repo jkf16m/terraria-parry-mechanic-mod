@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using log4net;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -12,11 +11,9 @@ namespace parry_mechanic.Content.Parry
     public class ParryBuffSCMessage : SCMessage<ParryMechanicMod, EmptyData, EmptyData>
     {
         private GameplayModConfigService gameplayModConfigService;
-        private ILog logger;
         public ParryBuffSCMessage()
         {
             gameplayModConfigService = Container.Resolve<GameplayModConfigService>();
-            logger                   = Container.Resolve<ILog>();
         }
 
 
@@ -34,22 +31,16 @@ namespace parry_mechanic.Content.Parry
 
         public override void OnServer(int whoAmI)
         {
-            logger.Info("ParryBuffSCMessage.OnServer");
-            logger.Info($"whoAmI: {whoAmI}");
-
             var player = Main.player[whoAmI];
             int parryTimeWindow = gameplayModConfigService.ParryTimeWindowOnTicks;
             int parryMinimumManaCost = gameplayModConfigService.ParryMinimumManaCost;
-
-            
 
             if(player.CheckMana(parryMinimumManaCost, false, false)
                 && player.HasBuff(ModContent.BuffType<StrainedReflexesDebuff>()) == false
                 && player.HasBuff(ModContent.BuffType<ParryBuff>()) == false)
             {
-                logger.Info("The player has enough mana to parry");
-                player.AddBuff(ModContent.BuffType<ManaVeilBuff>(), 99999, false, false);
-                player.AddBuff(ModContent.BuffType<ParryBuff>(), parryTimeWindow, false, false);
+                player.AddBuff(ModContent.BuffType<ManaVeilBuff>(), 99999, true, false);
+                player.AddBuff(ModContent.BuffType<ParryBuff>(), parryTimeWindow, true, false);
             }
         }
     }
