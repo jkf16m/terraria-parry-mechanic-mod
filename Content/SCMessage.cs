@@ -92,7 +92,7 @@ namespace parry_mechanic.Content
 
         // and executes client-side logic
         public virtual void OnClients(ServerDataType data, int whoAmI) {
-            if(OnServerAndClientMode == true && Main.netMode != NetmodeID.SinglePlayer)
+            if(OnServerAndClientMode == true)
             {
                 OnServer(Main.myPlayer);
             }
